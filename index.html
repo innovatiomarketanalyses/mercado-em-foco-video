@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mercado em Foco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-tint:#F1F6FC;
+    --ink:#14181F;
+    --ink-muted:#5B6B80;
+    --rule:#E3E9F1;
+    --accent:#1B3A6B;
+    --accent-strong:#2C5FB8;
+    --accent-soft:#DCE8F7;
+    --f-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --f-body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 22px}
+  img{display:block;width:100%;height:auto;border-radius:3px}
+
+  .masthead{border-bottom:3px solid var(--ink);padding:28px 0 18px}
+  .masthead .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+  .masthead h1{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:.3px;
+    margin:0;
+  }
+  .masthead .pub{
+    font-family:var(--f-mono);
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-muted);
+  }
+
+  .meta-row{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    padding:16px 0 0;
+    font-family:var(--f-mono);
+    font-size:12px;
+    color:var(--ink-muted);
+  }
+  .meta-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--bg-tint);border:1px solid var(--rule);
+    border-radius:20px;padding:5px 12px;
+  }
+  .meta-badge.live{background:#FDECEC;border-color:#F3D3D3;color:#A3302F}
+  .meta-badge.live b{
+    display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:#D33;animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  @media (prefers-reduced-motion:reduce){ .meta-badge.live b{animation:none} }
+
+  article{padding:26px 0 60px}
+
+  .kicker{
+    font-family:var(--f-mono);
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent-strong);margin:0 0 10px;
+  }
+  h2{
+    font-family:var(--f-display);
+    font-weight:700;
+    font-size:clamp(27px,5vw,37px);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    margin:0 0 14px;
+    text-wrap:balance;
+  }
+  h3{
+    font-family:var(--f-display);
+    font-weight:600;
+    font-size:22px;
+    line-height:1.3;
+    margin:0 0 10px;
+    color:var(--accent);
+  }
+  .lede{
+    font-family:var(--f-display);
+    font-size:19px;
+    color:var(--ink-muted);
+    margin:0 0 20px;
+    font-style:italic;
+  }
+  p{margin:0 0 16px}
+  .byline{
+    font-size:14px;color:var(--ink-muted);margin:14px 0 22px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .byline b{color:var(--ink);font-weight:600}
+  .avatar{
+    width:30px;height:30px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--f-display);font-weight:700;font-size:13px;flex-shrink:0;
+  }
+
+  /* video, the centrepiece of this edition */
+  .video-block{margin:6px 0 20px}
+  .video-frame{
+    position:relative;width:100%;max-width:360px;margin:0 auto;
+    aspect-ratio:9/16;background:#0B0F16;border-radius:10px;overflow:hidden;
+    border:1px solid var(--rule);
+    box-shadow:0 10px 28px -14px rgba(20,24,31,.35);
+  }
+  .video-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#0B0F16}
+  .video-caption{
+    font-family:var(--f-mono);font-size:11.5px;color:var(--ink-muted);
+    text-align:center;margin-top:10px;max-width:360px;margin-left:auto;margin-right:auto;
+  }
+
+  figure{margin:22px 0}
+  figure img{border:1px solid var(--rule)}
+  figcaption{
+    font-family:var(--f-mono);font-size:11.5px;color:var(--ink-muted);
+    margin-top:8px;text-align:center;
+  }
+
+  .rule{border:none;border-top:1px solid var(--rule);margin:34px 0}
+
+  .agitate{
+    background:var(--bg-tint);
+    border-left:3px solid var(--accent-strong);
+    padding:20px 22px;margin:24px 0;
+    border-radius:0 4px 4px 0;
+  }
+  .agitate p{
+    font-family:var(--f-display);font-size:19px;font-style:italic;
+    color:var(--accent);margin:0 0 12px;line-height:1.45;
+  }
+  .agitate p:last-child{margin-bottom:0}
+
+  .section-num{
+    font-family:var(--f-mono);font-size:13px;font-weight:500;
+    color:var(--accent-strong);letter-spacing:.05em;margin-bottom:6px;
+  }
+
+  .cta-wrap{text-align:center;margin:30px 0}
+  .cta-btn{
+    display:inline-block;
+    background:var(--accent-strong);color:#fff;
+    font-family:var(--f-body);font-weight:600;font-size:16.5px;
+    padding:15px 30px;border-radius:8px;text-decoration:none;
+    box-shadow:0 2px 0 var(--accent);
+    transition:transform .12s;
+    min-height:44px;
+  }
+  .cta-btn:hover{transform:translateY(-1px)}
+  @media (hover:none),(pointer:coarse){ .cta-btn:hover{transform:none} }
+  .cta-sub{
+    font-family:var(--f-mono);font-size:12px;color:var(--ink-muted);
+    margin-top:10px;
+  }
+
+  .quote-block{
+    background:#fff;border:1px solid var(--rule);border-left:4px solid var(--accent);
+    border-radius:4px;padding:22px 24px;margin:26px 0;
+  }
+  .quote-block p{
+    font-family:var(--f-display);font-size:18.5px;font-style:italic;
+    color:var(--ink);margin:0 0 14px;line-height:1.5;
+  }
+  .quote-who{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--f-body);font-weight:600;font-size:14.5px;
+  }
+  .quote-tag{
+    font-family:var(--f-mono);font-size:10.5px;color:var(--ink-muted);
+    font-weight:400;
+  }
+
+  .proof-head{text-align:center;margin:44px 0 24px}
+  .proof-head .kicker{justify-content:center;display:block}
+  .proof-grid{
+    display:grid;grid-template-columns:1fr;gap:14px;margin:0 0 30px;
+  }
+  @media (min-width:560px){ .proof-grid{grid-template-columns:1fr 1fr 1fr} }
+  .proof-card{
+    background:var(--bg-tint);border-top:3px solid var(--accent-strong);
+    border-radius:0 0 6px 6px;padding:18px 16px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .proof-card p{
+    font-size:14px;color:var(--ink);margin:0;flex:1;line-height:1.55;
+  }
+  .proof-name{
+    font-family:var(--f-mono);font-size:12px;color:var(--accent);font-weight:500;
+  }
+
+  footer{
+    border-top:3px solid var(--ink);padding:26px 0 40px;
+    color:var(--ink-muted);font-size:12.5px;line-height:1.6;
+  }
+  footer b{color:var(--ink)}
+  footer p{margin:0 0 8px;max-width:60ch}
+
+  @media (max-width:380px){
+    body{font-size:16px}
+    .masthead h1{font-size:24px}
+    h2{font-size:25px}
+    .lede{font-size:17px}
+    .cta-btn{padding:14px 22px;font-size:15.5px}
+    .video-frame{max-width:300px}
+    .video-caption{max-width:300px}
+  }
+
+  @media (min-width:700px){
+    body{font-size:18px}
+    .wrap{max-width:700px}
+    .masthead h1{font-size:31px}
+    .lede{font-size:20px}
+    .agitate p{font-size:20px}
+    .quote-block p{font-size:19.5px}
+    .video-frame{max-width:400px}
+    .video-caption{max-width:400px}
+  }
+
+  @media (min-width:980px){
+    .wrap{max-width:760px}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <h1>Mercado em Foco</h1>
+      <div class="pub">publicado por Innovative Market Analysis</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="meta-row">
+    <span class="meta-badge live"><b></b> Vídeo · bastidores da equipa</span>
+    <span class="meta-badge">🕗 Leitura + vídeo: 90 segundos</span>
+  </div>
+</div>
+
+<article>
+  <div class="wrap">
+
+    <div class="kicker">POR DENTRO DA ANÁLISE · BASTIDORES</div>
+    <h2>Fomos ver como nasce, todos os dias, a análise que sai às 20h</h2>
+    <p class="lede">A equipa deixou-nos filmar parte do processo. Isto é o que vimos.</p>
+
+    <div class="byline">
+      <div class="avatar">MF</div>
+      <div>Por <b>Equipa de Redação</b>, Mercado em Foco <span class="quote-tag">· Publicado 15 de setembro de 2026</span></div>
+    </div>
+
+    <div class="video-block">
+      <div class="video-frame">
+        <video controls playsinline preload="metadata" poster="assets/poster.jpg" width="720" height="1280">
+          <source src="assets/video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-caption">Bastidores da preparação da análise diária</div>
+    </div>
+
+    <p>No vídeo, vês a rotina real por trás da leitura das 20h: os mercados a serem acompanhados ao longo do dia, o plano da semana escrito no quadro branco, as notas de gestão de risco ao lado do teclado. No fim, a mesma frase resume tudo: a equipa analisa, tu decides.</p>
+
+    <div class="agitate">
+      <p>Já perdeste a conta a quantas vezes pensaste "preciso de mais uma fonte de rendimento", já tarde da noite, sem saber bem por onde começar?</p>
+      <p>Já reparaste como o salário parece acabar sempre uns dias antes do fim do mês, por mais que te organizes?</p>
+      <p>E se já tentaste alguma coisa online antes, já sentiste aquele receio de que era só mais um esquema disfarçado?</p>
+    </div>
+
+    <p>Se calhar não é falta de sorte. É que a maioria das pessoas que promete "rendimento extra" pede-te para confiares primeiro e veres depois. Este processo funciona ao contrário: vês a análise a sair, todas as noites, antes de pensares em dar qualquer passo.</p>
+
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://wa.me/message/CBEQFKOGFBGCO1">Quero ver a análise das 20h</a>
+      <div class="cta-sub">Entra e acompanha ao teu ritmo.</div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section-num">01</div>
+    <h3>O que está escrito no quadro do vídeo</h3>
+    <p>No plano da semana que aparece atrás da equipa lê-se, em três linhas: analisar os mercados (FX, índices, cripto), preparar o conteúdo das 20h, rever a gestão de risco. É esse processo, repetido todos os dias, que dá origem à leitura sobre para onde o mercado tende a ir no minuto seguinte. Um modelo de inteligência artificial foi treinado para estudar essa tendência de muito curto prazo, e é essa análise que sai às 20h em ponto, todos os dias, sem falhar.</p>
+
+    <div class="section-num">02</div>
+    <h3>Porque podes ver antes de decidir</h3>
+    <p>Entra no grupo e acompanha a análise a sair, e o resultado a ser publicado logo a seguir, sem filtro, durante os dias que quiseres, antes de pensares em dar qualquer passo. Ninguém te pede para decidires nada hoje.</p>
+
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://wa.me/message/CBEQFKOGFBGCO1">Quero ver a análise das 20h</a>
+      <div class="cta-sub">Entra e acompanha ao teu ritmo.</div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section-num">03</div>
+    <h3>A parte que a maioria não mostra</h3>
+    <p>Existe uma forma própria de usar essa leitura, com um plano de gestão bem definido. Preferimos mostrar essa parte com calma, dentro do grupo, a resumir numa página. É a parte mais importante de tudo.</p>
+
+    <div class="quote-block">
+      <p>"Já tinha investido em diversas coisas como loja de roupa, programa de afiliados, antes e estava com bastante receio. Comecei com os 7.000 MT mínimos justamente para testar. A ideia era primeiro perceber o funcionamento e, depois dos 15 dias, avaliar se continuava."</p>
+      <div class="quote-who">Marlene <span class="quote-tag">· Grupo de WhatsApp 2</span></div>
+    </div>
+
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://wa.me/message/CBEQFKOGFBGCO1">Quero ver a análise das 20h</a>
+      <div class="cta-sub">Entra e acompanha ao teu ritmo.</div>
+    </div>
+
+    <hr class="rule">
+
+    <div class="section-num">04</div>
+    <h3>O que encontras quando entras</h3>
+    <p>Um grupo activo, com pessoas reais a acompanhar a mesma análise, todas as noites. Alguém da equipa responde às tuas perguntas, ao teu ritmo, sem pressa nenhuma.</p>
+
+    <p>O vídeo lá em cima mostra o trabalho por trás da análise. O que fazes com ela é sempre contigo: entra, acompanha, e decide ao teu ritmo, como este grupo em Maputo já está a fazer.</p>
+
+    <div class="proof-head">
+      <div class="kicker">O QUE DIZEM OS QUE JÁ ENTRARAM</div>
+    </div>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <p>"Sou comerciante e sinceramente estes últimos tempos não têm sido fáceis. Quando vi a proposta, pensei logo que era bom demais para ser verdade. Mas sou curioso e decidi arriscar com 10.000 MT. Foi uma experiência que me surpreendeu bastante."</p>
+        <div class="proof-name">Francisco · Grupo 1</div>
+      </div>
+      <div class="proof-card">
+        <p>"Fui daqueles que disse logo no início que não acreditava muito 😂. Já vi vários esquemas com muita publicidade a desaparecer depois. Decidi observar primeiro e, quando resolvi testar, comecei com 11.500 MT."</p>
+        <div class="proof-name">Américo · Grupo 1</div>
+      </div>
+      <div class="proof-card">
+        <p>"Fiquei quase uma semana só a ler as mensagens e ver as análises, porque como mãe solteira todo o dinheiro que consigo é para o meu filho de 3 anos. Depois de acompanhar melhor, decidi começar com 7.000 MT."</p>
+        <div class="proof-name">Lucia · Grupo 2</div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a class="cta-btn" href="https://wa.me/message/CBEQFKOGFBGCO1">Quero ver a análise das 20h</a>
+      <div class="cta-sub">Entra e acompanha ao teu ritmo.</div>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <div class="wrap">
+    <p><b>Mercado em Foco</b> · uma publicação da Innovative Market Analysis. Conteúdo informativo.</p>
+  </div>
+</footer>
+
+</body>
+</html>
